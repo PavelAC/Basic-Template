@@ -1,0 +1,162 @@
+/* You can add global styles to this file, and also import other style files */
+:root{
+    --clr-dark: #070a13;
+    --clr-light: #f1f5f9;
+    --clr-slate400: #94a3b8;
+    --clr-slate600: #475569;
+    --clr-slate800: #1e293b;
+    --clr-fuchsia: #701a75;
+    --clr-violet: #4c1d95;
+    --clr-violet2: #2e1065;
+
+    /* orange rgb(234, 88, 12) */
+    /* indigo rgb(79, 70, 229) */
+
+    /* sizes */
+    --size-xxs: 0.5rem;
+    --size-xs: 0.75rem;
+    --size-sm: 0.875rem;
+    --size-base: 1rem;
+    --size-lg: 1.125rem;
+    --size-xl: 1.25rem;
+    --size-2xl: 1.5rem;
+    --size-3xl: 1.875rem;
+    --size-4xl: 2.25rem;
+    --size-5xl: 3rem;
+    --size-6xl: 3.75rem;
+    --size-7xl: 4.5rem;
+    --size-8xl: 6rem;
+    --size-9xl: 8rem;
+    --size-10xl: 10rem;
+
+}
+
+*{
+    margin: 0;
+    line-height: calc(1em + 0.5rem);
+}
+
+html{scroll-behavior: smooth;}
+
+body{
+    display: flex;
+    flex-direction: column;
+    font-family: "Roboto", sans-serif;
+    background-color: var(--clr-dark);
+    color: var(--clr-light);
+    min-height: 100vh;
+}
+.content{
+    min-height: 73vh;
+}
+
+img,picture,
+canvas,video,svg{
+    display: block;
+    max-width: 100%;
+    user-select: none;
+}
+
+button{
+    display: inline-block;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: inherit;
+}
+
+a{
+    color: var(--clr-fuchsia);
+}
+
+strong{
+    color: var(--clr-violet);
+}
+
+.btn{
+    display: inline-block;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: -0.05em;
+    background-color: var(--clr-fuchsia);
+    color: var(--clr-light);
+    padding: 0.5em 1em;
+    border-radius: 6px;
+    box-shadow: 0 10px 20px rgba(234, 88, 12,0.5),
+     0 6px 6px rgba(234, 88, 12,0.5),
+     0 0 100px -10px var(--clr-fuchsia);
+     transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px rgba(234, 88, 12,0.25),
+     0 10px 10px rgba(234, 88, 12,0.22),
+     0 0 120px -10px var(--clr-fuchsia);
+}
+
+.container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    /* border: 1px solid red; */    
+}
+
+.section{
+    margin-top: 5rem;
+}
+
+.box{
+    border-radius: 1.5rem;
+}
+
+/* xs */
+@media (min-width: 475px) {
+    .container{
+        max-width: 475px;
+    }
+}
+
+/* sm */
+@media (min-width: 640px) {
+    .container{
+        max-width: 640px;
+    }
+}
+
+/* md */
+@media (min-width: 768px) {
+    .container{
+        max-width: 768px;
+    }
+}
+
+/* lg */
+@media (min-width: 1024px) {
+    .container{
+        max-width: 1024px;
+    }
+    .section{
+        margin-top: 10rem;
+    }
+}
+
+/* xl */
+@media (min-width: 1280px) {
+    .container{
+        max-width: 1280px;
+    }
+    .section{
+        margin-top: 10rem;
+    }
+}
+
+/* 2xl */
+@media (min-width: 1536px) {
+    .container{
+        max-width: 1536px;
+    }
+}

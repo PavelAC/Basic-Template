@@ -1,0 +1,92 @@
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+    background-color: var(--clr-slate800);
+    border-top: 1px solid var(--clr-slate600);
+}
+
+.footer ul {
+    display: flex;
+    gap: 0.5rem; /* Default gap for larger screens */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center; /* Default flex alignment */
+    flex-wrap: wrap; /* Wrap items on larger screens if necessary */
+}
+.footer li {
+    margin: 0;
+}
+
+.footer a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: var(--clr-fuchsia);
+    color: var(--clr-light);
+    text-decoration: none;
+    font-size: 1.5rem;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.footer a:hover {
+    background-color: var(--clr-violet);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.footer a i {
+    pointer-events: none; /* Ensures icons don't block the anchor's functionality */
+}
+
+/* xs */
+@media (max-width: 475px) {
+    .footer ul {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(3rem, 1fr));
+        gap: 0.75rem;
+        justify-items: center; /* Centers items inside the grid cells */
+    }
+}
+
+/* sm */
+@media (max-width: 640px) {
+    .footer ul {
+        grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
+        gap: 1rem;
+    }
+}
+
+/* md */
+@media (max-width: 768px) {
+    .footer ul {
+        grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
+        gap: 1.25rem;
+    }
+}
+
+/* lg */
+@media (min-width: 1024px) {
+    .footer ul {
+        gap: 2rem; /* Provide more space between items */
+    }
+}
+
+/* xl */
+@media (min-width: 1280px) {
+    .footer ul {
+        gap: 2.5rem; /* Maximum spacing for extra-large screens */
+    }
+}
+
+/* 2xl */
+@media (min-width: 1536px) {
+    .footer ul {
+        gap: 3rem; /* Luxurious spacing for very large screens */
+    }
+}
