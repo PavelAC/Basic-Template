@@ -1,24 +1,60 @@
-import { inject } from '@angular/core';
-import { CanMatchFn, RedirectCommand, Router, Routes } from '@angular/router';
-import { NavbarComponent } from './header/navbar/navbar.component';
+import { Routes } from '@angular/router';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
+import { ConfigService } from './config.service';
+import { firstValueFrom } from 'rxjs';
+import { AppComponent } from './app.component';
 
-const dummyCanMatch: CanMatchFn = (route, segments) => {
-    const router = inject(Router);
-    const shouldGetAccess = Math.random();
-    if (shouldGetAccess < 1) {
-      return true;
-    }
-    return new RedirectCommand(router.parseUrl('/unauthorized'));
+export async function generateRoutes(configService: ConfigService): Promise<Routes> {
+  const config = await firstValueFrom(configService.getConfig()) as {
+    menu: {
+      elements: Array<{ label: string; route: string; enable: boolean }>;
+    };
+    footer: {
+      elements: Array<{ icon: string; route: string; enable: boolean }>;
+    };
   };
 
-export const routes: Routes = [
+  const translations = await firstValueFrom(configService.translations$);
+
+  if (!config) {
+    console.error('Configuration is undefined or could not be loaded.');
+    return [
+      {
+        path: '**',
+        redirectTo: '/',
+      },
+    ];
+  }
+
+  const menuRoutes = config.menu.elements
+    .filter((item) => item.enable)
+    .map((item) => ({
+      path: item.route.replace(/^\//, ''),
+      component: HeaderComponent,
+      data: { label: translations?.menu?.[item.label] || item.label }, // Use translated label
+    }));
+
+  const footerRoutes = config.footer.elements
+    .filter((item) => item.enable)
+    .map((item) => ({
+      path: item.route.replace(/^\//, ''),
+      component: FooterComponent,
+      data: { icon: item.icon },
+    }));
+
+  return [
     {
-        path:':linkId',
-        component: NavbarComponent,
-        // children: ,
-        canMatch: [dummyCanMatch],
-        data: {
-            message: 'link Sucessfull!',
-          },
-    }
-]
+      path: '',
+      component: HeaderComponent,
+      children: [
+        ...menuRoutes,
+        ...footerRoutes,
+      ],
+    },
+    {
+      path: '**',
+      redirectTo: '/',
+    },
+  ];
+}

@@ -1,0 +1,114 @@
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: var(--clr-slate800);
+  color: var(--clr-light);
+  border-bottom: 1px solid var(--clr-slate600);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar ul {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  width: 100%; 
+}
+
+.navbar li {
+  margin: 0;
+}
+
+.navbar .language-selector {
+  margin-left: auto;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: var(--clr-light);
+  font-size: var(--size-base);
+  font-weight: 500;
+  transition: color 0.3s, border-color 0.3s;
+  border-bottom: 2px solid transparent;
+}
+
+.navbar a:hover {
+  color: var(--clr-fuchsia);
+  border-bottom: 2px solid var(--clr-fuchsia);
+}
+
+/* Sidebar Styles */
+.sidebar-list {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 250px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar-list.visible {
+  transform: translateX(0);
+}
+
+.sidebar-list li {
+  list-style: none;
+}
+
+.sidebar-list a {
+  display: block;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  color: var(--clr-light);
+  font-weight: 600;
+  border-radius: 6px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar-list a:hover {
+  background-color: var(--clr-fuchsia);
+  color: var(--clr-dark);
+}
+
+/* Icon Styles */
+.hamburger-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamburger-icon {
+  width: 24px;
+  height: 24px;
+  fill: var(--clr-light);
+  transition: transform 0.3s, fill 0.3s;
+}
+
+.hamburger-btn:hover .hamburger-icon {
+  fill: var(--clr-fuchsia);
+  transform: scale(1.1);
+}
+
+/* Disabled Link Styles */
+.disabled-link {
+  color: gray;
+  cursor: not-allowed;
+}

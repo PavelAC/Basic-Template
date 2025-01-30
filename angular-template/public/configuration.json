@@ -1,0 +1,72 @@
+{
+    "menu": {
+        "elements":[
+            {
+                "label": "Menu Item 1",
+                "route": "/menu-item-1",
+                "enable": true
+            },
+            {
+              "label": "Menu Item 2",
+              "route": "/menu-item-2",
+              "enable": true
+            },
+            {
+              "label": "Menu Item 3",
+              "route": "/menu-item-3",
+              "enable": true
+            },
+            {
+              "label": "Menu Item 4",
+              "route": "/menu-item-4",
+              "enable": true
+            },
+            {
+              "label": "Menu Item 5",
+              "route": "/menu-item-5",
+              "enable": true
+            }
+        ],
+        "sticky":false,
+        "transparent": false,
+        "visible": true
+    },
+    "footer": {
+        "elements":[
+            {
+              "icon": "fa fa-facebook",
+              "route": "/footer-item-1",
+              "enable": true
+            },
+            {
+              "icon": "fa fa-instagram",
+              "route": "/footer-item-2",
+              "enable": true
+            },
+            {
+              "icon": "fa fa-github",
+              "route": "/footer-item-3",
+              "enable": true
+            },
+            {
+              "icon": "fa fa-linkedin",
+              "route": "/footer-item-4",
+              "enable": true
+            },
+            {
+              "icon": "fa fa-x",
+              "route": "/footer-item-5",
+              "enable": true
+            },
+            {
+              "icon": "fa fa-tiktok",
+              "route": "/footer-item-6",
+              "enable": true
+            }
+        ],
+        "enable":true,
+        "sticky":false,
+        "transparent": false,
+        "visible": true
+    }
+}

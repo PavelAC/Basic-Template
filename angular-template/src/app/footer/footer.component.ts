@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FooterService, Social } from './footer.service'; // Adjust the import path as necessary
+import { FooterService } from './footer.service'; 
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-footer',
@@ -10,12 +12,23 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-  socials: Social[] = [];
+  footerData: any =null;
 
   constructor(private footerService: FooterService) {}
 
   ngOnInit(): void {
-    this.socials = this.footerService.getSocials();
-    console.log(this.socials);
+    this.footerService.getSocials().subscribe({
+      next: (data: any) => {
+        this.footerData = data;
+        console.log('Footer Data:', this.footerData);
+      },
+      error: (error) => {
+        console.error('Error fetching footer data:', error);
+      },
+      complete: () => {
+        console.log('Footer data fetching completed.');
+      }
+    });
+    
   }
 }

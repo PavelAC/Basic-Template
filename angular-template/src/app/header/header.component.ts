@@ -1,37 +1,45 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-import { NavbarComponent } from './navbar/navbar.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
+import { Component, OnInit } from '@angular/core';
+import { HeaderService } from './header.service';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { ConfigService } from '../config.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [NavbarComponent, SidebarComponent],
+  imports: [CommonModule, RouterModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  isNavbarVisible: boolean = true;
-  isSideBarVisible: boolean = false;
+  isSidebarVisible = false;
+  menuData: any;
+  currentLanguage = 'en';
+
+  constructor(
+    private headerService: HeaderService,
+    private configService: ConfigService
+  ) {}
 
   ngOnInit(): void {
-    this.checkWindowSize();
+    this.configService.loadTranslations(this.currentLanguage);
+
+    this.configService.translations$.subscribe((translations) => {
+      console.log('Translations:', translations);
+      if (translations) {
+        this.menuData = translations.menu;
+      }
+    });
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
-    this.checkWindowSize();
+  toggleSidebarVisibility() {
+    this.isSidebarVisible = !this.isSidebarVisible;
   }
 
-  private checkWindowSize(): void {
-    const width = window.innerWidth;
-    if (width > 768) {
-      this.isNavbarVisible = true;
-      this.isSideBarVisible = false;
-      console.log('nav');
-    } else {
-      this.isNavbarVisible = false;
-      this.isSideBarVisible = true;
-      console.log('side');
-    }
+  changeLanguage(event: any) {
+    const lang = event.target.value;
+    this.configService.loadTranslations(lang);
+    this.currentLanguage = lang;
+    console.log('language: ', lang);
   }
 }

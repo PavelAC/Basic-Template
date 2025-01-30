@@ -1,6 +1,6 @@
-<footer class="footer container box">
+<footer class="footer">
   <ul>
-    <li *ngFor="let social of socials">
+    <li *ngFor="let social of footerData?.elements">
       <a [href]="social.link" target="_blank" class="btn">
         <i [class]="social.icon"></i>
       </a>

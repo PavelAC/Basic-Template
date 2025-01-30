@@ -1,26 +1,19 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map, Observable } from 'rxjs';
 
-export interface NavbarItem {
-  id: string;
-  label: string;
-  link: string;
-}
 
 @Injectable({
   providedIn: 'root'
 })
 export class HeaderService {
+  private dataUrl = 'configuration.json';
 
-  private navbarItems: NavbarItem[] = [
-    { id:'1', label: 'Home', link: '/' },
-    { id:'2', label: 'About', link: '/about' },
-    { id:'3', label: 'Services', link: '/services' },
-    { id:'4', label: 'Contact', link: '/contact' },
-  ];
+  constructor(private http: HttpClient) {}
 
-  getNavbarItems(): NavbarItem[]{
-    return this.navbarItems
+  getHeaderData(): Observable<any> {
+    return this.http.get<any>(this.dataUrl).pipe(
+      map((data) => data.menu)
+    );
   }
-
-  constructor() { }
 }

@@ -42,8 +42,8 @@ body{
     display: flex;
     flex-direction: column;
     font-family: "Roboto", sans-serif;
-    background-color: var(--clr-dark);
-    color: var(--clr-light);
+    background-color: var(--clr-light);
+    color: var(--clr-dark);
     min-height: 100vh;
 }
 .content{

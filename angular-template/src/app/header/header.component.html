@@ -1,2 +1,76 @@
-<app-navbar [isVisible]="isNavbarVisible"></app-navbar>
-<app-sidebar [isVisible]="isSideBarVisible"></app-sidebar>
+<nav class="header">
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <ul class="sidebar-list" [class.visible]="isSidebarVisible" [hidden]="!isSidebarVisible">
+      <li>
+        <button class="hamburger-btn" (click)="toggleSidebarVisibility()">
+          <svg xmlns="http://www.w3.org/2000/svg"
+            height="50px"
+            viewBox="0 -960 960 960"
+            width="50px" 
+            fill="currentColor"
+            class="hamburger-icon">
+            <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+          </svg>
+        </button>
+      </li>
+      <li *ngFor="let item of menuData?.elements">
+        <a [routerLink]="item.route" *ngIf="item.enable">{{ item.label }}</a>
+        <span *ngIf="!item.enable" class="disabled-link">{{ item.label }}</span>
+      </li>
+      <!-- Language Dropdown -->
+      <li>
+        <!-- <div class="dropdown">
+          <button class="dropdown-btn">
+            Language
+            <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16" fill="currentColor">
+              <path d="M7 10l5 5 5-5z"/>
+            </svg>
+          </button>
+          <ul class="dropdown-menu">
+            <li (click)="changeLanguage('en')">English</li>
+            <li (click)="changeLanguage('es')">Español</li>
+            <li (click)="changeLanguage('fr')">Français</li>
+            <li (click)="changeLanguage('de')">Deutsch</li>
+          </ul>
+        </div> -->
+        <select (change)="changeLanguage($event)">
+          <option value="en">English</option>
+          <option value="fr">French</option>
+          <option value="de">German</option>
+          <option value="es">Spanish</option>
+        </select>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Header Menu -->
+  <div class="navbar">
+    <ul>
+      <li>
+        <button class="hamburger-btn" (click)="toggleSidebarVisibility()">
+          <svg xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 50 50" 
+            width="50px" 
+            height="50px" 
+            fill="currentColor"
+            class="hamburger-icon">
+            <path d="M 0 7.5 L 0 12.5 L 50 12.5 L 50 7.5 Z M 0 22.5 L 0 27.5 L 50 27.5 L 50 22.5 Z M 0 37.5 L 0 42.5 L 50 42.5 L 50 37.5 Z"/>
+          </svg>
+        </button>
+      </li>
+      <li *ngFor="let item of menuData?.elements" [class.disabled]="!item.enable">
+        <a [routerLink]="item.route" *ngIf="item.enable">{{ item.label }}</a>
+        <span *ngIf="!item.enable" class="disabled-link">{{ item.label }}</span>
+      </li>
+      <li class="language-selector">
+        <select (change)="changeLanguage($event)">
+          <option value="en">English</option>
+          <option value="fr">French</option>
+          <option value="de">German</option>
+          <option value="es">Spanish</option>
+        </select>
+      </li>
+    </ul>
+  </div>
+</nav>
