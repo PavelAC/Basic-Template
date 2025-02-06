@@ -8,6 +8,7 @@ import { Observable } from "rxjs";
 @Component({
     selector: 'app-auth',
     templateUrl: './auth.component.html',
+    styleUrls: ['./auth.component.css'],
     standalone: true,
     imports: [CommonModule, FormsModule, loadeingSpinnerComponent],
 })

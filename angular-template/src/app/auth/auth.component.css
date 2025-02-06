@@ -1,0 +1,55 @@
+/* Auth Component Styles */
+
+/* Center the form */
+div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+/* Style input fields */
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid var(--clr-slate400);
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Style buttons */
+button {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--clr-slate600);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--clr-slate800);
+}
+
+/* Style error message */
+p {
+    color: red;
+    font-weight: bold;
+}
+
+/* Center loading spinner */
+app-loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
