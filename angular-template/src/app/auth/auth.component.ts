@@ -9,42 +9,44 @@ import { Observable } from "rxjs";
     selector: 'app-auth',
     templateUrl: './auth.component.html',
     standalone: true,
-      imports: [CommonModule, FormsModule, loadeingSpinnerComponent],
+    imports: [CommonModule, FormsModule, loadeingSpinnerComponent],
 })
-export class AuthComponent{
+export class AuthComponent {
     IsLogged = true;
     IsLoading = false;
     error: string = '';
-    
 
     constructor(private authService: AuthService) {}
 
     onSwitchMode() {
-        this.IsLogged = !this.IsLogged
+        this.IsLogged = !this.IsLogged;
     }
 
     onSubmit(form: NgForm) {
-        if(!form.valid){return;}
-        const email =form.value.email;
-        const password =form.value.password;
+        if (!form.valid) { return; }
+        const email = form.value.email;
+        const password = form.value.password;
+
+        // Log the email and password for debugging
+        console.log('Email:', email);
+        console.log('Password:', password);
 
         let authOps: Observable<AuthResponsData>;
 
-        this.IsLoading =true;
-        if(this.IsLogged){
-          authOps = this.authService.login(email,password);
-        }else{
-           authOps = this.authService.signup(email,password);
-        } 
-        authOps.subscribe(resData =>
-            {
+        this.IsLoading = true;
+        if (this.IsLogged) {
+            authOps = this.authService.login(email, password);
+        } else {
+            authOps = this.authService.signup(email, password);
+        }
+        authOps.subscribe(resData => {
                 console.log(resData);
-                this.IsLoading =false;
+                this.IsLoading = false;
             },
             errorMessage => {
                 console.log(errorMessage);
                 this.error = errorMessage;
-                this.IsLoading =false;
+                this.IsLoading = false;
             });
 
         form.reset();
