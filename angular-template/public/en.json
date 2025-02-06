@@ -2,8 +2,8 @@
   "menu": {
     "elements":[
         {
-            "label": "Menu Item 1",
-            "route": "/menu-item-1",
+            "label": "Authentification",
+            "route": "/auth",
             "enable": true
         },
         {

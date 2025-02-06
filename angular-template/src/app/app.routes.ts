@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { ConfigService } from './config.service';
 import { firstValueFrom } from 'rxjs';
 import { AppComponent } from './app.component';
+import { AuthComponent } from './auth/auth.component';
 
 export async function generateRoutes(configService: ConfigService): Promise<Routes> {
   const config = await firstValueFrom(configService.getConfig()) as {
@@ -51,6 +52,11 @@ export async function generateRoutes(configService: ConfigService): Promise<Rout
         ...menuRoutes,
         ...footerRoutes,
       ],
+    },
+    {
+      path: 'auth',
+      component: AuthComponent, 
+      // redirectTo: '/',
     },
     {
       path: '**',
