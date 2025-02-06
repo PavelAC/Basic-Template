@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms'; 
-import { AuthService } from "./auth.service";
+import { AuthResponsData, AuthService } from "./auth.service";
 import { loadeingSpinnerComponent } from "../../../public/loading-spinner/loading-spinner.component";
+import { Observable } from "rxjs";
 
 @Component({
     selector: 'app-auth',
@@ -26,22 +27,26 @@ export class AuthComponent{
         if(!form.valid){return;}
         const email =form.value.email;
         const password =form.value.password;
+
+        let authOps: Observable<AuthResponsData>;
+
         this.IsLoading =true;
         if(this.IsLogged){
-
+          authOps = this.authService.login(email,password);
         }else{
-            this.authService.signup(email,password).subscribe(resData =>
-                {
-                    console.log(resData);
-                    this.IsLoading =false;
-                },
-                errorMessage => {
-                    console.log(errorMessage);
-                    this.error = errorMessage;
-                    this.IsLoading =false;
-                }
-                );
+           authOps = this.authService.signup(email,password);
         } 
+        authOps.subscribe(resData =>
+            {
+                console.log(resData);
+                this.IsLoading =false;
+            },
+            errorMessage => {
+                console.log(errorMessage);
+                this.error = errorMessage;
+                this.IsLoading =false;
+            });
+
         form.reset();
     }
 }
