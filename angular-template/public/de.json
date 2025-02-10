@@ -1,34 +1,35 @@
 {
     "menu": {
-    "elements": [
+      "elements": [
         {
-            "label": "Menüpunkt 1",
-            "route": "/menu-item-1",
-            "enable": true
+          "label": "Authentifizierung",
+          "route": "/auth",
+          "enable": true
         },
         {
-            "label": "Menüpunkt 2",
-            "route": "/menu-item-2",
-            "enable": true
+          "label": "Autos",
+          "route": "/cars",
+          "enable": true
         },
         {
-            "label": "Menüpunkt 3",
-            "route": "/menu-item-3",
-            "enable": true
+          "label": "Menüpunkt 3",
+          "route": "/menu-item-3",
+          "enable": false
         },
         {
-            "label": "Menüpunkt 4",
-            "route": "/menu-item-4",
-            "enable": true
+          "label": "Menüpunkt 4",
+          "route": "/menu-item-4",
+          "enable": false
         },
         {
-            "label": "Menüpunkt 5",
-            "route": "/menu-item-5",
-            "enable": true
+          "label": "Menüpunkt 5",
+          "route": "/menu-item-5",
+          "enable": false
         }
-    ],
-    "sticky": false,
-    "transparent": false,
-    "visible": true
-}
+      ],
+      "sticky": false,
+      "transparent": false,
+      "visible": true
+    }
   }
+  

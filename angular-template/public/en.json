@@ -7,24 +7,24 @@
             "enable": true
         },
         {
-          "label": "Menu Item 2",
-          "route": "/menu-item-2",
+          "label": "Cars",
+          "route": "/cars",
           "enable": true
         },
         {
           "label": "Menu Item 3",
           "route": "/menu-item-3",
-          "enable": true
+          "enable": false
         },
         {
           "label": "Menu Item 4",
           "route": "/menu-item-4",
-          "enable": true
+          "enable": false
         },
         {
           "label": "Menu Item 5",
           "route": "/menu-item-5",
-          "enable": true
+          "enable": false
         }
     ],
     "sticky":false,
