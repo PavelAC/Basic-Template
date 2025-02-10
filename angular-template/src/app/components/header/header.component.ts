@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HeaderService } from './header.service';
+import { HeaderService } from '../../services/header.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { ConfigService } from '../config.service';
+import { ConfigService } from '../../services/config.service';
 
 @Component({
   selector: 'app-header',

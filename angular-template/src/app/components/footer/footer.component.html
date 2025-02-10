@@ -1,0 +1,12 @@
+<footer class="footer">
+  <ul>
+    <li *ngFor="let social of footerData?.elements">
+      <a [routerLink]="social.route">
+        <!-- Display SVG if available -->
+        <span *ngIf="social.svg" [innerHTML]="social.safeSvg"></span>
+        <!-- Display Font Awesome icon if available -->
+        <i *ngIf="social.icon" [class]="social.icon"></i>
+      </a>
+    </li>
+  </ul>
+</footer>

@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms'; 
-import { AuthResponsData, AuthService } from "./auth.service";
-import { loadeingSpinnerComponent } from "../../../public/loading-spinner/loading-spinner.component";
+import { AuthResponsData, AuthService } from "../../services/auth.service";
+import { loadeingSpinnerComponent } from "../../../../public/loading-spinner/loading-spinner.component";
 import { Observable } from "rxjs";
 
 @Component({

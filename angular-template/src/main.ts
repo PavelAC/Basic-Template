@@ -3,7 +3,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, Router } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { AppComponent } from './app/app.component';
-import { ConfigService } from './app/config.service';
+import { ConfigService } from './app/services/config.service';
 import { generateRoutes } from './app/app.routes';
 
 function initializeRoutes(configService: ConfigService) {

@@ -18,22 +18,7 @@
         <a [routerLink]="item.route" *ngIf="item.enable">{{ item.label }}</a>
         <span *ngIf="!item.enable" class="disabled-link">{{ item.label }}</span>
       </li>
-      <!-- Language Dropdown -->
-      <li>
-        <!-- <div class="dropdown">
-          <button class="dropdown-btn">
-            Language
-            <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16" fill="currentColor">
-              <path d="M7 10l5 5 5-5z"/>
-            </svg>
-          </button>
-          <ul class="dropdown-menu">
-            <li (click)="changeLanguage('en')">English</li>
-            <li (click)="changeLanguage('es')">Español</li>
-            <li (click)="changeLanguage('fr')">Français</li>
-            <li (click)="changeLanguage('de')">Deutsch</li>
-          </ul>
-        </div> -->
+      <li class="language-selector">
         <select (change)="changeLanguage($event)">
           <option value="en">English</option>
           <option value="fr">French</option>

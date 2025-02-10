@@ -38,16 +38,21 @@
 
 html{scroll-behavior: smooth;}
 
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+
 body{
     display: flex;
     flex-direction: column;
     font-family: "Roboto", sans-serif;
-    background-color: var(--clr-light);
+    background: linear-gradient(to right, #94a3b8, #4c1d95);
     color: var(--clr-dark);
-    min-height: 100vh;
+    min-height: 10  0vh;
 }
 .content{
-    min-height: 73vh;
+    min-height: 80vh;
 }
 
 img,picture,

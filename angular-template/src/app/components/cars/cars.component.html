@@ -1,0 +1,39 @@
+<div class="form-container">
+  <h1 class="title">Car Details Finder</h1>
+
+  <div class="form">
+    <div class="input-group">
+      <label for="manufacturer">Manufacturer:</label>
+      <select id="manufacturer" [(ngModel)]="selectedManufacturer" (change)="onManufacturerChange()">
+        <option value="">Select Manufacturer</option>
+        <option *ngFor="let manufacturer of manufacturers" [value]="manufacturer.name">
+          {{ manufacturer.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="input-group model-group" *ngIf="selectedManufacturer" [@slideIn]>
+      <label for="model">Model:</label>
+      <select id="model" [(ngModel)]="selectedModel" (change)="onModelChange()">
+        <option value="">Select Model</option>
+        <option *ngFor="let model of models" [value]="model.name">
+          {{ model.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div *ngIf="carDetails" class="car-details" [@slideIn]>
+    <h2>Car Details</h2>
+    <p><strong>Make:</strong> {{ carDetails.make }}</p>
+    <p><strong>Model:</strong> {{ carDetails.model }}</p>
+    <p><strong>Body Type:</strong> {{ carDetails.bodyType }}</p>
+    <p><strong>Engine:</strong> {{ carDetails.engine }}</p>
+    <p><strong>Trim:</strong> {{ carDetails.trim }}</p>
+    <p><strong>Exterior Color:</strong> {{ carDetails.exteriorColor }}</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error">
+    {{ errorMessage }}
+  </div>
+</div>

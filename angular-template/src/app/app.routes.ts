@@ -1,10 +1,11 @@
 import { Routes } from '@angular/router';
-import { FooterComponent } from './footer/footer.component';
-import { HeaderComponent } from './header/header.component';
-import { ConfigService } from './config.service';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
+import { ConfigService } from './services/config.service';
 import { firstValueFrom } from 'rxjs';
 import { AppComponent } from './app.component';
-import { AuthComponent } from './auth/auth.component';
+import { AuthComponent } from './components/auth/auth.component';
+import { CarsComponent } from './components/cars/cars.component';
 
 export async function generateRoutes(configService: ConfigService): Promise<Routes> {
   const config = await firstValueFrom(configService.getConfig()) as {
@@ -52,6 +53,11 @@ export async function generateRoutes(configService: ConfigService): Promise<Rout
         ...menuRoutes,
         ...footerRoutes,
       ],
+    },
+    {
+      path: 'cars',
+      component: CarsComponent, 
+      // redirectTo: '/',
     },
     {
       path: 'auth',

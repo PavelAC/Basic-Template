@@ -1,0 +1,96 @@
+/* Container Styling */
+.form-container {
+    margin: 5rem;
+    width: 25rem;
+    border-radius: 0.75rem;
+    background-color: rgba(17, 24, 39, 0.85); 
+    padding: 2rem;
+    color: rgba(243, 244, 246, 1); 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Title */
+.title {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Form */
+.form {
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+/* Input Group */
+.input-group {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.input-group label {
+    display: block;
+    color: rgba(156, 163, 175, 1); /* Muted Gray */
+    margin-bottom: 4px;
+}
+
+.input-group select {
+    width: 100%;
+    border-radius: 0.375rem;
+    border: 1px solid rgba(55, 65, 81, 1); /* Darker Gray */
+    background-color: rgba(31, 41, 55, 1); /* Dark Blue */
+    padding: 0.75rem 1rem;
+    color: rgba(243, 244, 246, 1); /* Light Text */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group select:hover {
+    border-color: rgba(167, 139, 250, 1); /* Purple Highlight */
+}
+
+.input-group select:focus {
+    border-color: rgba(167, 139, 250, 1);
+    outline: none;
+    box-shadow: 0 0 8px rgba(167, 139, 250, 0.5);
+}
+
+/* Slide-in Animation */
+.model-group {
+    animation: slideIn 0.5s ease-out forwards;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Car Details */
+.car-details {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(31, 41, 55, 1); /* Darker Background */
+    border-left: 4px solid rgba(167, 139, 250, 1); /* Purple Accent */
+    border-radius: 5px;
+    width: 100%;
+}
+
+.car-details h2 {
+    margin-bottom: 10px;
+    color: rgba(167, 139, 250, 1); /* Purple Text */
+}
+
+/* Error Message */
+.error {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
