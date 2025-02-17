@@ -15,7 +15,7 @@ interface UserPreferences {
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
+  styleUrls: ['./header.component.css' , './header2.component.css'],
 })
 export class HeaderComponent implements OnInit {
   isSidebarVisible = false;
