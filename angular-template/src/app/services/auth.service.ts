@@ -41,9 +41,9 @@ export class AuthService {
   private listenToAuthChanges() {
     onAuthStateChanged(this.auth, async (user) => {
         if (user) {
-            await user.reload(); // Make sure user data is fresh
+            await user.reload(); 
             const token = await user.getIdToken();
-            this.HandleAuthentification(user.email!, user.uid, token, 3600); // Removed emailVerified
+            this.HandleAuthentification(user.email!, user.uid, token, 3600); 
         } else {
             this.user.next(null);
         }
@@ -95,7 +95,7 @@ export class AuthService {
           console.log('🔹 Current Firebase User:', user);
       
           if (user) {
-              await user.reload(); // Ensure latest auth state
+              await user.reload();
               console.log('✅ User after reload:', user);
       
               if (!user.emailVerified) {
@@ -149,33 +149,44 @@ export class AuthService {
   }
 
   // Handle authentication and save preferences after verification
-  private async HandleAuthentification(
-    email: string, 
-    userId: string, 
-    token: string, 
-    expiresIn: number // Removed emailVerified
-  ) {
-      const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-      const user = new User(email, userId, token, expirationDate);
-      this.user.next(user);
+  private async HandleAuthentification(email: string, userId: string, token: string, expiresIn: number) {
+    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+    this.user.next(new User(email, userId, token, expirationDate));
 
-      const auth = getAuth();
-      const currentUser = auth.currentUser;
+    // Fetch and apply preferences separately
+    const existingPreferences = await this.getUserPreferences(userId);
+    if (existingPreferences) {
+        console.log("✅ Loaded user preferences:", existingPreferences);
+        this.applyUserPreferences(existingPreferences.language, existingPreferences.theme);
+    } else {
+        console.log("⚠️ No preferences found. Skipping default overwrite.");
+    }
 
-      if (currentUser) {
-        await currentUser.reload();
-        if (currentUser.emailVerified) {
-          console.log('Email is verified, saving preferences...');
-          await this.saveUserPreferences(userId, 'en', 'light');
-        } else {
-          console.warn('Email not verified, skipping preference save.');
-        }
-      } else {
-        console.error('No authenticated user found.');
-      }
-  }
+    // const auth = getAuth();
+    // const currentUser = auth.currentUser;
 
-  // Save user preferences (language, theme, etc.)
+    // if (currentUser) {
+    //     await currentUser.reload();
+    //     if (currentUser.emailVerified) {
+    //         console.log('Email is verified, fetching preferences...');
+            
+    //         const existingPreferences = await this.getUserPreferences(userId);
+    //         if (existingPreferences) {
+    //             console.log('✅ User preferences found:', existingPreferences);
+    //         } else {
+    //             console.log('⚠️ No preferences found. Setting defaults.');
+    //             await this.saveUserPreferences(userId, 'en', 'light');
+    //         }
+    //     } else {
+    //         console.warn('Email not verified, skipping preference fetch.');
+    //     }
+    // } else {
+    //     console.error('No authenticated user found.');
+    // }
+}
+
+
+  // Save user preferences
   async saveUserPreferences(userId: string, language: string, theme: string): Promise<void> {
     const user = getAuth().currentUser;
     if (user) {
@@ -197,11 +208,41 @@ export class AuthService {
   async getUserPreferences(userId: string): Promise<{ language: string, theme: string } | null> {
     const userDocRef = doc(this.firestore, `users/${userId}`);
     const docSnap = await getDoc(userDocRef);
-    return docSnap.exists() ? docSnap.data() as { language: string, theme: string } : null;
-  }
+
+    if (docSnap.exists()) {
+        console.log('✅ Fetched user preferences:', docSnap.data());
+        return docSnap.data() as { language: string, theme: string };
+    } else {
+        console.warn('⚠️ No user preferences found.');
+        return null;
+    }
+}
+
+
+  // Sign out the current user
+  async signOut() {
+    try {
+        const auth = getAuth();
+        await signOut(auth);
+        console.log("✅ User signed out successfully.");
+
+        const lastUser = this.user.value;
+        if (lastUser) {
+            console.log("🔹 Preserving preferences before logout.");
+        }
+
+        this.user.next(null);
+    } catch (error) {
+        console.error("❌ Error signing out:", error);
+        throw error;
+    }
+}
+
+
 
   // Handle error response from Firebase API
   private handleError(errorRes: HttpErrorResponse) {
+
     let errorMessage = 'An unknown error occurred!';
     if (!errorRes.error || !errorRes.error.error) {
       return throwError(() => new Error(errorMessage));
@@ -219,4 +260,12 @@ export class AuthService {
     }
     return throwError(() => new Error(errorMessage));
   }
+
+  private applyUserPreferences(language: string, theme: string) {
+    console.log(`🌍 Applying preferences - Language: ${language}, Theme: ${theme}`);
+    
+    localStorage.setItem('preferredLanguage', language);
+    localStorage.setItem('preferredTheme', theme);
+}
+
 }

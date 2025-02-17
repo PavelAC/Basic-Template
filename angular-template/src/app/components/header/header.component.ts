@@ -123,4 +123,13 @@ export class HeaderComponent implements OnInit {
   toggleSidebarVisibility() {
     this.isSidebarVisible = !this.isSidebarVisible;
   }
+
+  async logout() {
+    try {
+      await this.authService.signOut();
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  }
+
 }

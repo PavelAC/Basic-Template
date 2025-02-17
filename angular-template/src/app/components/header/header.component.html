@@ -57,6 +57,11 @@
         </select>
       </li>
     </ul>
+    <button class="logout-btn" (click)="logout()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+        <path fill="currentColor" d="M5 22C4.44772 22 4 21.5523 4 21V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V6H18V4H6V20H18V18H20V21C20 21.5523 19.5523 22 19 22H5ZM16 16V13H9V11H16V8L21 12L16 16Z"/>
+      </svg>
+    </button>
     <label for="theme" class="theme">
       <span class="theme__toggle-wrap">
         <input id="theme" class="theme__toggle" type="checkbox" role="switch" name="theme" value="dark" (change)="toggleTheme()">
@@ -74,5 +79,6 @@
         </span>
       </span>
     </label>
+
   </div>
 </nav>
