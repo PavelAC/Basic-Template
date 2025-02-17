@@ -19,7 +19,7 @@
         <span *ngIf="!item.enable" class="disabled-link">{{ item.label }}</span>
       </li>
       <li class="language-selector">
-        <select (change)="changeLanguage($event)">
+        <select (change)="changeLanguage($event)" [value]="currentLanguage">
           <option value="en">English</option>
           <option value="fr">French</option>
           <option value="de">German</option>
@@ -31,25 +31,25 @@
 
   <!-- Header Menu -->
   <div class="navbar">
-    <ul>
-      <li>
-        <button class="hamburger-btn" (click)="toggleSidebarVisibility()">
-          <svg xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 50 50" 
-            width="50px" 
-            height="50px" 
-            fill="currentColor"
-            class="hamburger-icon">
-            <path d="M 0 7.5 L 0 12.5 L 50 12.5 L 50 7.5 Z M 0 22.5 L 0 27.5 L 50 27.5 L 50 22.5 Z M 0 37.5 L 0 42.5 L 50 42.5 L 50 37.5 Z"/>
-          </svg>
-        </button>
-      </li>
+    <div>
+      <button class="hamburger-btn" (click)="toggleSidebarVisibility()">
+        <svg xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 50 50" 
+          width="50px" 
+          height="50px" 
+          fill="currentColor"
+          class="hamburger-icon">
+          <path d="M 0 7.5 L 0 12.5 L 50 12.5 L 50 7.5 Z M 0 22.5 L 0 27.5 L 50 27.5 L 50 22.5 Z M 0 37.5 L 0 42.5 L 50 42.5 L 50 37.5 Z"/>
+        </svg>
+      </button>
+    </div>
+    <ul class="menu">
       <li *ngFor="let item of menuData?.elements" [class.disabled]="!item.enable">
         <a [routerLink]="item.route" *ngIf="item.enable">{{ item.label }}</a>
         <span *ngIf="!item.enable" class="disabled-link">{{ item.label }}</span>
       </li>
       <li class="language-selector">
-        <select (change)="changeLanguage($event)">
+        <select (change)="changeLanguage($event)" [value]="currentLanguage">
           <option value="en">English</option>
           <option value="fr">French</option>
           <option value="de">German</option>
@@ -57,5 +57,22 @@
         </select>
       </li>
     </ul>
+    <label for="theme" class="theme">
+      <span class="theme__toggle-wrap">
+        <input id="theme" class="theme__toggle" type="checkbox" role="switch" name="theme" value="dark" (change)="toggleTheme()">
+        <span class="theme__fill"></span>
+        <span class="theme__icon">
+          <span class="theme__icon-part"></span>
+          <span class="theme__icon-part"></span>
+          <span class="theme__icon-part"></span>
+          <span class="theme__icon-part"></span>
+          <span class="theme__icon-part"></span>
+          <span class="theme__icon-part"></span>
+          <span class="theme__icon-part"></span>
+          <span class="theme__icon-part"></span>
+          <span class="theme__icon-part"></span>
+        </span>
+      </span>
+    </label>
   </div>
 </nav>

@@ -20,6 +20,15 @@ export class FooterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Apply dark theme if set in local storage
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme === 'dark') {
+      document.body.classList.add('dark-theme');
+      // Removed incorrect attempt to add dark theme class to footerData
+
+    }
+
+
     this.footerService.getSocials().subscribe({
       next: (data: any) => {
         this.footerData = data;

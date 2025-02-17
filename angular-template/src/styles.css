@@ -43,14 +43,33 @@ html, body {
     margin: 0;
   }
 
-body{
+body {
     display: flex;
     flex-direction: column;
     font-family: "Roboto", sans-serif;
     background: linear-gradient(to right, #94a3b8, #4c1d95);
     color: var(--clr-dark);
-    min-height: 10  0vh;
+    min-height: 100vh;
 }
+
+body.dark-theme {
+    background: var(--clr-dark);
+    color: var(--clr-light);
+}
+
+body.dark-theme .btn {
+    background-color: var(--clr-fuchsia);
+    color: var(--clr-light);
+}
+
+body.dark-theme a {
+    color: var(--clr-light);
+}
+
+body.dark-theme strong {
+    color: var(--clr-violet);
+}
+
 .content{
     min-height: 80vh;
 }
