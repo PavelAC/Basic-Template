@@ -78,12 +78,20 @@ export class HeaderComponent implements OnInit {
     this.configService.loadTranslations(this.currentLanguage);
     console.log('Language changed to:', this.currentLanguage);
 
+    // Update both selectors
+    const selectors = document.querySelectorAll('.language-selector select');
+    selectors.forEach((select) => {
+      (select as HTMLSelectElement).value = this.currentLanguage;
+    });
+
+
     if (this.userId) {
       await this.updatePreferences();
     } else {
       localStorage.setItem('language', this.currentLanguage);
     }
   }
+
 
   async toggleTheme() {
     const isDark = document.body.classList.toggle('dark-theme');
