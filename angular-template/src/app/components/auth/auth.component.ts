@@ -1,9 +1,9 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, NgForm } from '@angular/forms'; 
-import { AuthResponsData, AuthService } from "../../services/auth.service";
-import { loadeingSpinnerComponent } from "../../../../public/loading-spinner/loading-spinner.component";
-import { Observable } from "rxjs";
+import { FormsModule, NgForm } from '@angular/forms';
+import { AuthService, AuthResponsData } from '../../services/auth.service';
+import { LoadingService } from '../../services/loading.service';
+import { Observable } from 'rxjs';
 import { 
     Auth, 
     getAuth, 
@@ -11,26 +11,21 @@ import {
     onAuthStateChanged, 
     sendEmailVerification, 
     signInWithEmailAndPassword 
-  } from '@angular/fire/auth';
+} from '@angular/fire/auth';
 
 @Component({
     selector: 'app-auth',
     templateUrl: './auth.component.html',
     styleUrls: ['./auth.component.css'],
     standalone: true,
-    imports: [
-        CommonModule,
-        FormsModule,
-        loadeingSpinnerComponent
-    ],
+    imports: [CommonModule, FormsModule]
 })
 export class AuthComponent {
     IsLogged = true;
-    IsLoading = false;
     error: string = '';
     successMessage: string = '';
 
-    constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService, private loadingService: LoadingService) {}
 
     onSwitchMode() {
         this.IsLogged = !this.IsLogged;
@@ -42,9 +37,17 @@ export class AuthComponent {
         if (!form.valid) { return; }
         const email = form.value.email;
         const password = form.value.password;
+        
+        if (!this.IsLogged) {
+            const confirmPassword = form.value.confirmPassword;
+            if (password !== confirmPassword) {
+                this.error = 'Passwords do not match';
+                return;
+            }
+        }
     
         let authOps: Observable<AuthResponsData>;
-        this.IsLoading = true;
+        this.loadingService.show();
         this.error = '';
         this.successMessage = '';
     
@@ -58,8 +61,7 @@ export class AuthComponent {
             next: resData => {
                 console.log('✅ Auth Response:', resData);
                 console.log('🔹 Current Firebase User:', getAuth().currentUser);
-                
-                this.IsLoading = false;
+                this.loadingService.hide();
         
                 if (!this.IsLogged) {
                     this.successMessage = 'A verification email has been sent. Please check your inbox before logging in.';
@@ -70,7 +72,7 @@ export class AuthComponent {
             error: errorMessage => {
                 console.error('❌ Auth Error:', errorMessage);
                 this.error = errorMessage;
-                this.IsLoading = false;
+                this.loadingService.hide();
             }
         });    
         form.reset();
@@ -90,5 +92,4 @@ export class AuthComponent {
                 this.error = err.message;
             });
     }
-    
 }

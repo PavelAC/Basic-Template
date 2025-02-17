@@ -1,40 +1,54 @@
 <div class="form-container">
-    <p class="title">{{ IsLogged ? 'Login' : 'Sign Up' }}</p>
-    <form class="form" (ngSubmit)="onSubmit(authForm)" #authForm="ngForm" *ngIf="!IsLoading">
-        <div class="input-group">
-            <label for="email">E-mail</label>
-            <input 
-                type="email"
-                id="email"
-                ngModel
-                name="email"
-                required
-                email
-                placeholder="Enter your email"
-            />  
-        </div>
-        <div class="input-group">
-            <label for="password">Password</label>
-            <input 
-                type="password"
-                id="password"
-                name="password"
-                ngModel
-                required
-                minlength="6"
-                placeholder="Enter your password"
-            />
-            <div class="forgot">
-                <button type="button" (click)="onResetPassword(authForm)">Forgot Password?</button>
-            </div>
-        </div>
-        <button class="sign" type="submit" [disabled]="!authForm.valid">{{ IsLogged ? 'Log In' : 'Sign Up' }}</button>
-    </form>
+  <p class="title">{{ IsLogged ? 'Login' : 'Sign Up' }}</p>
+  <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" class="form">
+    <div class="input-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" ngModel required email placeholder="Enter your email">
+    </div>
+    <div class="input-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" ngModel required minlength="6" placeholder="Enter your password">
+    </div>
+    <div class="input-group" *ngIf="!IsLogged">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" ngModel required minlength="6" placeholder="Confirm your password">
+    </div>
+    <div class="forgot">
+      <button type="button" (click)="onResetPassword(authForm)">Forgot Password?</button>
+    </div>
+    <button class="sign" type="submit" [disabled]="!authForm.valid">
+      {{ IsLogged ? 'Login' : 'Sign Up' }}
+    </button>
+  </form>
 
-    <div *ngIf="error" class="error-message">{{ error }}</div>
-    <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+  <div class="social-message">
+    <div class="line"></div>
+    <p class="message">Login with social accounts</p>
+    <div class="line"></div>
+  </div>
 
-    <p class="signup">{{ IsLogged ?  'Don`t have an account?': 'Already registered?' }}
-        <button rel="noopener noreferrer" href="#" (click)="onSwitchMode()">{{ IsLogged ? 'Sign Up' : 'Log In' }}</button>
-    </p>
+  <div class="social-icons">
+    <button aria-label="Log in with Google" class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="w-5 h-5 fill-current">
+        <!-- Google Icon Path -->
+      </svg>
+    </button>
+    <button aria-label="Log in with Twitter" class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="w-5 h-5 fill-current">
+        <!-- Twitter Icon Path -->
+      </svg>
+    </button>
+    <button aria-label="Log in with GitHub" class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="w-5 h-5 fill-current">
+        <!-- GitHub Icon Path -->
+      </svg>
+    </button>
+  </div>
+
+  <p class="signup">
+    <button type="button" (click)="onSwitchMode()">Switch to {{ IsLogged ? 'Sign Up' : 'Login' }}</button>
+  </p>
+
+  <p *ngIf="error" class="error-message">{{ error }}</p>
+  <p *ngIf="successMessage" class="success-message">{{ successMessage }}</p>
 </div>

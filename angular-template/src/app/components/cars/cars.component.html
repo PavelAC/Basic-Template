@@ -12,7 +12,7 @@
       </select>
     </div>
 
-    <div class="input-group model-group" *ngIf="selectedManufacturer" [@slideIn]>
+    <div class="input-group model-group" *ngIf="selectedManufacturer">
       <label for="model">Model:</label>
       <select id="model" [(ngModel)]="selectedModel" (change)="onModelChange()">
         <option value="">Select Model</option>
@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <div *ngIf="carDetails" class="car-details" [@slideIn]>
+  <div *ngIf="carDetails" class="car-details">
     <h2>Car Details</h2>
     <p><strong>Make:</strong> {{ carDetails.make }}</p>
     <p><strong>Model:</strong> {{ carDetails.model }}</p>
