@@ -1,11 +1,10 @@
 import { Routes } from '@angular/router';
-import { FooterComponent } from './components/footer/footer.component';
-import { HeaderComponent } from './components/header/header.component';
 import { ConfigService } from './services/config.service';
 import { firstValueFrom } from 'rxjs';
-import { AppComponent } from './app.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { CarsComponent } from './components/cars/cars.component';
+import { AuthGuard } from './components/auth/auth.guard';
+import { HeaderComponent } from './components/header/header.component';
 
 export async function generateRoutes(configService: ConfigService): Promise<Routes> {
   const config = await firstValueFrom(configService.getConfig()) as {
@@ -34,36 +33,25 @@ export async function generateRoutes(configService: ConfigService): Promise<Rout
     .map((item) => ({
       path: item.route.replace(/^\//, ''),
       component: HeaderComponent,
-      data: { label: translations?.menu?.[item.label] || item.label }, // Use translated label
-    }));
-
-  const footerRoutes = config.footer.elements
-    .filter((item) => item.enable)
-    .map((item) => ({
-      path: item.route.replace(/^\//, ''),
-      component: FooterComponent,
-      data: { icon: item.icon },
+      data: { label: translations?.menu?.[item.label] || item.label },
     }));
 
   return [
     {
       path: '',
-      component: HeaderComponent,
-      children: [
-        ...menuRoutes,
-        ...footerRoutes,
-      ],
-    },
-    {
-      path: 'cars',
-      component: CarsComponent, 
-      // redirectTo: '/',
+      redirectTo: '/auth',
+      pathMatch: 'full',
     },
     {
       path: 'auth',
-      component: AuthComponent, 
-      // redirectTo: '/',
+      component: AuthComponent,
     },
+    {
+      path: 'cars',
+      component: CarsComponent,
+      canActivate: [AuthGuard],
+    },
+    ...menuRoutes,
     {
       path: '**',
       redirectTo: '/',

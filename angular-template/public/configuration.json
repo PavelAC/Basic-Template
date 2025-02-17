@@ -1,31 +1,31 @@
 {
     "menu": {
         "elements":[
-            {
-                "label": "Menu Item 1",
-                "route": "/menu-item-1",
-                "enable": true
-            },
-            {
-              "label": "Menu Item 2",
-              "route": "/menu-item-2",
-              "enable": true
-            },
-            {
-              "label": "Menu Item 3",
-              "route": "/menu-item-3",
-              "enable": true
-            },
-            {
-              "label": "Menu Item 4",
-              "route": "/menu-item-4",
-              "enable": true
-            },
-            {
-              "label": "Menu Item 5",
-              "route": "/menu-item-5",
-              "enable": true
-            }
+          {
+            "label": "Authentification",
+            "route": "/auth",
+            "enable": true
+        },
+        {
+          "label": "Cars",
+          "route": "/cars",
+          "enable": true
+        },
+        {
+          "label": "Menu Item 3",
+          "route": "/menu-item-3",
+          "enable": false
+        },
+        {
+          "label": "Menu Item 4",
+          "route": "/menu-item-4",
+          "enable": false
+        },
+        {
+          "label": "Menu Item 5",
+          "route": "/menu-item-5",
+          "enable": false
+        }
         ],
         "sticky":false,
         "transparent": false,

@@ -25,28 +25,16 @@
                 placeholder="Enter your password"
             />
             <div class="forgot">
-                <a *ngIf="IsLogged" href="#">Forgot Password?</a>
+                <button type="button" (click)="onResetPassword(authForm)">Forgot Password?</button>
             </div>
         </div>
         <button class="sign" type="submit" [disabled]="!authForm.valid">{{ IsLogged ? 'Log In' : 'Sign Up' }}</button>
     </form>
-    <!-- <div class="social-message">
-        <div class="line"></div>
-        <p class="message">Login with social accounts</p>
-        <div class="line"></div>
-    </div>
-    <div class="social-icons">
-        <button aria-label="Log in with Google" class="icon">
 
-        </button>
-        <button aria-label="Log in with Twitter" class="icon">
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+    <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
 
-        </button>
-        <button aria-label="Log in with GitHub" class="icon">
-
-        </button>
-    </div> -->
-    <p class="signup">{{ IsLogged ?  'Don`t have an account?': 'Already registerd?' }}
+    <p class="signup">{{ IsLogged ?  'Don`t have an account?': 'Already registered?' }}
         <button rel="noopener noreferrer" href="#" (click)="onSwitchMode()">{{ IsLogged ? 'Sign Up' : 'Log In' }}</button>
     </p>
 </div>
