@@ -8,8 +8,11 @@
     -webkit-backdrop-filter: blur(8px);
     color: var(--clr-light);
     box-shadow: 3px 0 6px rgba(0, 0, 0, 0.3);
-    z-index: 10; /* Ensure navbar is above other elements */
+    z-index: 10; 
+    min-height: 5rem;
 }
+
+
 
 .footer.dark-theme {
     background: var(--clr-slate800);
@@ -21,16 +24,16 @@
     gap: 1rem;
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: auto;
     flex-wrap: wrap;
-    justify-content: center; /* Ensures icons are centered */
+    justify-content: center; 
 }
 
 .footer li {
-    margin: 0;
+    margin: auto;
 }
 
-.footer a {
+.footer .social {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -55,6 +58,14 @@
 
 .footer a i {
     pointer-events: none;
+}
+
+.copy {
+    font-size: var(--size-xs);
+}
+.copy a{
+    font-size: var(--size-xs);
+    display: inline-block;
 }
 
 /* 🖥️ Responsive Adjustments */

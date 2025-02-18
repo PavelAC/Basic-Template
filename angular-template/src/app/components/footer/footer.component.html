@@ -1,7 +1,7 @@
 <footer class="footer">
   <ul>
     <li *ngFor="let social of footerData?.elements">
-      <a [routerLink]="social.route">
+      <a class="social" [routerLink]="social.route">
         <!-- Display SVG if available -->
         <span *ngIf="social.svg" [innerHTML]="social.safeSvg"></span>
         <!-- Display Font Awesome icon if available -->
@@ -9,4 +9,8 @@
       </a>
     </li>
   </ul>
+  <span class="copy">
+    <!-- © {{ year }} {{ footerData?.copyright }} -->
+    © 2025. All rights reserved. Developed by <a href="https://github.com/PavelAC">PavelAc</a>
+  </span>
 </footer>
