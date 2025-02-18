@@ -4,14 +4,11 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { AuthService, AuthResponsData } from '../../services/auth.service';
 import { LoadingService } from '../../services/loading.service';
 import { Observable } from 'rxjs';
-import { 
-    Auth, 
+import {  
     getAuth, 
-    signOut, 
-    onAuthStateChanged, 
     sendEmailVerification, 
-    signInWithEmailAndPassword 
 } from '@angular/fire/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 @Component({
     selector: 'app-auth',
@@ -78,11 +75,44 @@ export class AuthComponent {
         form.reset();
     }
     
-    onResetPassword(form: NgForm) {
-        if (!form.value.email) {
-            this.error = "Please enter your email to reset your password.";
-            return;
-        }
+ 
+resendVerificationEmail(form: NgForm) {
+    const email = form.value.email;
+    const password = 'TemporaryPass123!'; // Temporary password (won't be used)
+
+    if (!email) {
+        this.error = 'Please enter your email to resend verification.';
+        return;
+    }
+
+    this.loadingService.show();
+    const auth = getAuth();
+
+    createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            return sendEmailVerification(user);
+        })
+        .then(() => {
+            this.successMessage = 'Verification email sent! Check your inbox.';
+            this.loadingService.hide();
+        })
+        .catch((error) => {
+            if (error.code === 'auth/email-already-in-use') {
+                this.error = 'This email is already registered. Try logging in.';
+            } else {
+                this.error = error.message;
+            }
+            this.loadingService.hide();
+        });
+}
+
+  onResetPassword(form: NgForm) {
+    if (!form.value.email) {
+      this.error = "Please enter your email to reset your password.";
+      return;
+    }
+
     
         this.authService.resetPassword(form.value.email)
             .then(() => {

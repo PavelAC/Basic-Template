@@ -13,11 +13,22 @@
       <label for="confirmPassword">Confirm Password</label>
       <input type="password" id="confirmPassword" name="confirmPassword" ngModel required minlength="6" placeholder="Confirm your password">
     </div>
-    <div class="forgot">
-      <button type="button" (click)="onResetPassword(authForm)">Forgot Password?</button>
+    <div>
+      <div *ngIf="IsLogged; else signUpTemplate">
+        <div class="forgot">
+          <button type="button" (click)="onResetPassword(authForm)">Forgot Password?</button>
+        </div>
+      </div>
+      
+      <ng-template #signUpTemplate>
+        <div class="signup">
+          <button type="button" (click)="resendVerificationEmail(authForm)">Resend Email</button>
+        </div>
+      </ng-template>
     </div>
+    
     <button class="sign" type="submit" [disabled]="!authForm.valid">
-      {{ IsLogged ? 'Login' : 'Sign Up' }}
+      <span class="sign-text" >{{ IsLogged ? 'Login' : 'Sign Up' }}</span>
     </button>
   </form>
 
@@ -28,22 +39,28 @@
   </div>
 
   <div class="social-icons">
+    <!-- Google -->
     <button aria-label="Log in with Google" class="icon">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="w-5 h-5 fill-current">
-        <!-- Google Icon Path -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="w-5 h-5 fill-current">
+        <path fill="#4285F4" d="M24 21.82v5.55h10.58c-.47 2.8-3.22 8.22-10.58 8.22-6.41 0-11.62-5.21-11.62-11.62s5.21-11.62 11.62-11.62c3.52 0 6.5 1.46 8.64 3.6l4.08-4.08C33.68 8.12 29.14 6 24 6 13.42 6 5 14.42 5 25s8.42 19 19 19c10.95 0 18.53-7.7 18.53-18.53 0-1.24-.13-2.18-.3-3.08H24z"></path>
       </svg>
     </button>
+
+    <!-- Twitter -->
     <button aria-label="Log in with Twitter" class="icon">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="w-5 h-5 fill-current">
-        <!-- Twitter Icon Path -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5 fill-current">
+        <path d="M23.44 4.83c-.81.36-1.67.6-2.58.71a4.49 4.49 0 0 0 1.97-2.48c-.87.52-1.83.89-2.85 1.09a4.48 4.48 0 0 0-7.64 4.08A12.72 12.72 0 0 1 2.23 3.17a4.49 4.49 0 0 0 1.39 5.98c-.73-.02-1.42-.22-2.02-.56v.06c0 2.22 1.58 4.07 3.69 4.49a4.48 4.48 0 0 1-2.01.08c.57 1.77 2.22 3.06 4.17 3.1a8.96 8.96 0 0 1-5.54 1.91c-.36 0-.71-.02-1.06-.06a12.64 12.64 0 0 0 6.84 2.01c8.21 0 12.7-6.8 12.7-12.7v-.58a9.09 9.09 0 0 0 2.24-2.3z"></path>
       </svg>
     </button>
+
+    <!-- GitHub -->
     <button aria-label="Log in with GitHub" class="icon">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="w-5 h-5 fill-current">
-        <!-- GitHub Icon Path -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5 fill-current">
+        <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.523 2 12c0 4.418 2.865 8.167 6.839 9.49.5.09.682-.218.682-.487 0-.24-.01-1.034-.015-1.877-2.782.604-3.369-1.34-3.369-1.34-.454-1.152-1.11-1.459-1.11-1.459-.908-.621.07-.609.07-.609 1.003.07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.091-.645.348-1.08.635-1.33-2.222-.253-4.56-1.112-4.56-4.947 0-1.092.39-1.986 1.029-2.685-.103-.254-.447-1.276.097-2.66 0 0 .84-.268 2.75 1.025a9.65 9.65 0 0 1 2.5-.34c.85.004 1.71.116 2.5.34 1.91-1.293 2.75-1.025 2.75-1.025.544 1.384.2 2.406.097 2.66.64.7 1.029 1.593 1.029 2.685 0 3.844-2.34 4.69-4.57 4.937.36.31.68.91.68 1.83 0 1.32-.011 2.39-.011 2.71 0 .27.18.58.69.48C19.14 20.17 22 16.42 22 12c0-5.477-4.477-10-10-10z"></path>
       </svg>
     </button>
-  </div>
+</div>
+
 
   <p class="signup">
     <button type="button" (click)="onSwitchMode()">Switch to {{ IsLogged ? 'Sign Up' : 'Login' }}</button>
